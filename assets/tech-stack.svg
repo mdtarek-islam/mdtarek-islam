@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 380" width="960" height="380" role="img" aria-labelledby="ts-title ts-desc">
+<title id="ts-title">Tech stack of Md Tarek Islam, grouped in four columns</title>
+<desc id="ts-desc">Technologies used across the projects on this profile, with the number of projects that use each one. Languages: Python (8 projects), Java (1 project), TypeScript (1 project). ML and data: PyTorch (3 projects), TensorFlow (2 projects), Keras (2 projects), pandas (2 projects), scikit-learn (1 project), PIL (1 project), Sentence-Transformers (1 project), Sentence-BERT (1 project), Hugging Face (1 project), LangChain (1 project), Pinecone (1 project), ONNX Runtime (1 project). Cloud and infra: AWS Lambda (2 projects), API Gateway (2 projects), Terraform (2 projects), Docker (2 projects), DynamoDB (1 project), GitHub Actions (1 project), Supabase PostgreSQL (1 project), Render (1 project), Vercel (1 project). Web: React 19 (1 project), React Three Fiber (1 project), three.js (1 project), Vite (1 project), Streamlit (1 project), Gradio (1 project), REST APIs (1 project).</desc>
+<style>
+text{font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
+.h{fill:#e6edf3;font-size:15px;font-weight:600}
+.n{fill:#e6edf3;font-size:13px}
+.c{fill:#8b949e;font-size:12px}
+.k{fill:#8b949e;font-size:12px}
+.sep{fill:none;stroke:#30363d;stroke-width:1}
+.ul{fill:none;stroke:#58a6ff;stroke-width:2;stroke-dasharray:200;stroke-dashoffset:0;animation:draw .6s ease-out both}
+.m{fill:#3fb950}
+.bar{fill:#3fb950;fill-opacity:.25}
+.i{animation:in .45s ease-out both}
+@keyframes draw{from{stroke-dashoffset:200}}
+@keyframes in{from{opacity:0;transform:translateY(4px)}}
+@media (prefers-reduced-motion: reduce){*{animation:none!important}}
+</style>
+<rect width="960" height="380" rx="6" fill="#0d1117"/>
+<path class="sep" d="M255 28V336"/>
+<path class="sep" d="M485 28V336"/>
+<path class="sep" d="M715 28V336"/>
+<text class="h" x="40" y="48">Languages</text>
+<path class="ul" style="animation-delay:0ms" d="M40 60H230"/>
+<g class="i" style="animation-delay:0ms"><rect class="m" x="40" y="82" width="6" height="6" rx="1"/><text class="n" x="54" y="90">Python</text><text class="c" x="230" y="90" text-anchor="end">8</text></g>
+<g class="i" style="animation-delay:30ms"><rect class="m" x="40" y="103" width="6" height="6" rx="1"/><text class="n" x="54" y="111">Java</text><text class="c" x="230" y="111" text-anchor="end">1</text></g>
+<g class="i" style="animation-delay:60ms"><rect class="m" x="40" y="124" width="6" height="6" rx="1"/><text class="n" x="54" y="132">TypeScript</text><text class="c" x="230" y="132" text-anchor="end">1</text></g>
+<text class="h" x="270" y="48">ML and data</text>
+<path class="ul" style="animation-delay:80ms" d="M270 60H460"/>
+<g class="i" style="animation-delay:60ms"><rect class="m" x="270" y="82" width="6" height="6" rx="1"/><text class="n" x="284" y="90">PyTorch</text><text class="c" x="460" y="90" text-anchor="end">3</text></g>
+<g class="i" style="animation-delay:90ms"><rect class="m" x="270" y="103" width="6" height="6" rx="1"/><text class="n" x="284" y="111">TensorFlow</text><text class="c" x="460" y="111" text-anchor="end">2</text></g>
+<g class="i" style="animation-delay:120ms"><rect class="m" x="270" y="124" width="6" height="6" rx="1"/><text class="n" x="284" y="132">Keras</text><text class="c" x="460" y="132" text-anchor="end">2</text></g>
+<g class="i" style="animation-delay:150ms"><rect class="m" x="270" y="145" width="6" height="6" rx="1"/><text class="n" x="284" y="153">pandas</text><text class="c" x="460" y="153" text-anchor="end">2</text></g>
+<g class="i" style="animation-delay:180ms"><rect class="m" x="270" y="166" width="6" height="6" rx="1"/><text class="n" x="284" y="174">scikit-learn</text><text class="c" x="460" y="174" text-anchor="end">1</text></g>
+<g class="i" style="animation-delay:210ms"><rect class="m" x="270" y="187" width="6" height="6" rx="1"/><text class="n" x="284" y="195">PIL</text><text class="c" x="460" y="195" text-anchor="end">1</text></g>
+<g class="i" style="animation-delay:240ms"><rect class="m" x="270" y="208" width="6" height="6" rx="1"/><text class="n" x="284" y="216">Sentence-Transformers</text><text class="c" x="460" y="216" text-anchor="end">1</text></g>
+<g class="i" style="animation-delay:270ms"><rect class="m" x="270" y="229" width="6" height="6" rx="1"/><text class="n" x="284" y="237">Sentence-BERT</text><text class="c" x="460" y="237" text-anchor="end">1</text></g>
+<g class="i" style="animation-delay:300ms"><rect class="m" x="270" y="250" width="6" height="6" rx="1"/><text class="n" x="284" y="258">Hugging Face</text><text class="c" x="460" y="258" text-anchor="end">1</text></g>
+<g class="i" style="animation-delay:330ms"><rect class="m" x="270" y="271" width="6" height="6" rx="1"/><text class="n" x="284" y="279">LangChain</text><text class="c" x="460" y="279" text-anchor="end">1</text></g>
+<g class="i" style="animation-delay:360ms"><rect class="m" x="270" y="292" width="6" height="6" rx="1"/><text class="n" x="284" y="300">Pinecone</text><text class="c" x="460" y="300" text-anchor="end">1</text></g>
+<g class="i" style="animation-delay:390ms"><rect class="m" x="270" y="313" width="6" height="6" rx="1"/><text class="n" x="284" y="321">ONNX Runtime</text><text class="c" x="460" y="321" text-anchor="end">1</text></g>
+<text class="h" x="500" y="48">Cloud and infra</text>
+<path class="ul" style="animation-delay:160ms" d="M500 60H690"/>
+<g class="i" style="animation-delay:120ms"><rect class="m" x="500" y="82" width="6" height="6" rx="1"/><text class="n" x="514" y="90">AWS Lambda</text><text class="c" x="690" y="90" text-anchor="end">2</text></g>
+<g class="i" style="animation-delay:150ms"><rect class="m" x="500" y="103" width="6" height="6" rx="1"/><text class="n" x="514" y="111">API Gateway</text><text class="c" x="690" y="111" text-anchor="end">2</text></g>
+<g class="i" style="animation-delay:180ms"><rect class="m" x="500" y="124" width="6" height="6" rx="1"/><text class="n" x="514" y="132">Terraform</text><text class="c" x="690" y="132" text-anchor="end">2</text></g>
+<g class="i" style="animation-delay:210ms"><rect class="m" x="500" y="145" width="6" height="6" rx="1"/><text class="n" x="514" y="153">Docker</text><text class="c" x="690" y="153" text-anchor="end">2</text></g>
+<g class="i" style="animation-delay:240ms"><rect class="m" x="500" y="166" width="6" height="6" rx="1"/><text class="n" x="514" y="174">DynamoDB</text><text class="c" x="690" y="174" text-anchor="end">1</text></g>
+<g class="i" style="animation-delay:270ms"><rect class="m" x="500" y="187" width="6" height="6" rx="1"/><text class="n" x="514" y="195">GitHub Actions</text><text class="c" x="690" y="195" text-anchor="end">1</text></g>
+<g class="i" style="animation-delay:300ms"><rect class="m" x="500" y="208" width="6" height="6" rx="1"/><text class="n" x="514" y="216">Supabase PostgreSQL</text><text class="c" x="690" y="216" text-anchor="end">1</text></g>
+<g class="i" style="animation-delay:330ms"><rect class="m" x="500" y="229" width="6" height="6" rx="1"/><text class="n" x="514" y="237">Render</text><text class="c" x="690" y="237" text-anchor="end">1</text></g>
+<g class="i" style="animation-delay:360ms"><rect class="m" x="500" y="250" width="6" height="6" rx="1"/><text class="n" x="514" y="258">Vercel</text><text class="c" x="690" y="258" text-anchor="end">1</text></g>
+<text class="h" x="730" y="48">Web</text>
+<path class="ul" style="animation-delay:240ms" d="M730 60H920"/>
+<g class="i" style="animation-delay:180ms"><rect class="m" x="730" y="82" width="6" height="6" rx="1"/><text class="n" x="744" y="90">React 19</text><text class="c" x="920" y="90" text-anchor="end">1</text></g>
+<g class="i" style="animation-delay:210ms"><rect class="m" x="730" y="103" width="6" height="6" rx="1"/><text class="n" x="744" y="111">React Three Fiber</text><text class="c" x="920" y="111" text-anchor="end">1</text></g>
+<g class="i" style="animation-delay:240ms"><rect class="m" x="730" y="124" width="6" height="6" rx="1"/><text class="n" x="744" y="132">three.js</text><text class="c" x="920" y="132" text-anchor="end">1</text></g>
+<g class="i" style="animation-delay:270ms"><rect class="m" x="730" y="145" width="6" height="6" rx="1"/><text class="n" x="744" y="153">Vite</text><text class="c" x="920" y="153" text-anchor="end">1</text></g>
+<g class="i" style="animation-delay:300ms"><rect class="m" x="730" y="166" width="6" height="6" rx="1"/><text class="n" x="744" y="174">Streamlit</text><text class="c" x="920" y="174" text-anchor="end">1</text></g>
+<g class="i" style="animation-delay:330ms"><rect class="m" x="730" y="187" width="6" height="6" rx="1"/><text class="n" x="744" y="195">Gradio</text><text class="c" x="920" y="195" text-anchor="end">1</text></g>
+<g class="i" style="animation-delay:360ms"><rect class="m" x="730" y="208" width="6" height="6" rx="1"/><text class="n" x="744" y="216">REST APIs</text><text class="c" x="920" y="216" text-anchor="end">1</text></g>
+<text class="k" x="40" y="362">Number: projects on this profile that use the technology.</text>
+</svg>

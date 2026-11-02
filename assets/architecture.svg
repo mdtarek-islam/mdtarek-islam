@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" width="960" height="300" role="img" aria-labelledby="t d">
+  <title id="t">Profile repository architecture</title>
+  <desc id="d">A daily GitHub Actions schedule runs generate_skyline.py. The script reads the contribution calendar through the GitHub GraphQL API, renders london-skyline.svg and commits it only when it changes. The README embeds the skyline with the other SVG assets.</desc>
+  <style>
+    .bg { fill: #0d1117; }
+    .node { fill: #161b22; stroke: #30363d; stroke-width: 1; }
+    .out { fill: #161b22; stroke: #3fb950; stroke-width: 1; }
+    .t1 { fill: #e6edf3; font: 600 14px -apple-system, Segoe UI, Helvetica, Arial, sans-serif; }
+    .t2 { fill: #8b949e; font: 12px -apple-system, Segoe UI, Helvetica, Arial, sans-serif; }
+    .wire { fill: none; stroke: #30363d; stroke-width: 2; }
+    .flow { fill: none; stroke: #58a6ff; stroke-width: 2; stroke-dasharray: 10 190; stroke-dashoffset: 200; animation: pulse 3s linear infinite; }
+    .f2 { animation-delay: 0.6s; }
+    .f3 { animation-delay: 1.2s; }
+    .f4 { animation-delay: 1.8s; }
+    .f5 { animation-delay: 2.4s; }
+    @keyframes pulse { to { stroke-dashoffset: 0; } }
+    @media (prefers-reduced-motion: reduce) { .flow { animation: none; stroke-dasharray: none; stroke-opacity: 0.6; } }
+  </style>
+  <rect class="bg" width="960" height="300" rx="6"/>
+  <text class="t1" x="32" y="36">Profile repository: live skyline pipeline</text>
+
+  <rect class="node" x="32" y="70" width="160" height="64" rx="6"/>
+  <text class="t1" x="48" y="98">Daily schedule</text>
+  <text class="t2" x="48" y="118">update-skyline.yml</text>
+
+  <rect class="node" x="232" y="70" width="180" height="64" rx="6"/>
+  <text class="t1" x="248" y="98">generate_skyline.py</text>
+  <text class="t2" x="248" y="118">Python standard library</text>
+
+  <rect class="node" x="452" y="70" width="180" height="64" rx="6"/>
+  <text class="t1" x="468" y="98">GitHub GraphQL API</text>
+  <text class="t2" x="468" y="118">contribution calendar</text>
+
+  <rect class="out" x="672" y="70" width="256" height="64" rx="6"/>
+  <text class="t1" x="688" y="98">assets/london-skyline.svg</text>
+  <text class="t2" x="688" y="118">52 weeks, 7 windows each</text>
+
+  <rect class="node" x="672" y="190" width="256" height="64" rx="6"/>
+  <text class="t1" x="688" y="218">Commit if changed</text>
+  <text class="t2" x="688" y="238">github-actions bot</text>
+
+  <rect class="out" x="232" y="190" width="400" height="64" rx="6"/>
+  <text class="t1" x="248" y="218">README.md</text>
+  <text class="t2" x="248" y="238">banner, career motorway, project cards, skyline</text>
+
+  <path class="wire" d="M192 102 H232"/>
+  <path class="wire" d="M412 102 H452"/>
+  <path class="wire" d="M632 102 H672"/>
+  <path class="wire" d="M800 134 V190"/>
+  <path class="wire" d="M672 222 H632"/>
+  <path class="flow" d="M192 102 H232"/>
+  <path class="flow f2" d="M412 102 H452"/>
+  <path class="flow f3" d="M632 102 H672"/>
+  <path class="flow f4" d="M800 134 V190"/>
+  <path class="flow f5" d="M672 222 H632"/>
+</svg>

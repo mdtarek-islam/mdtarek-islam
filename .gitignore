@@ -1,0 +1,9 @@
+# Reference profiles for local study only. Never push.
+.examples/
+__pycache__/
+
+# Local secrets and measurements
+.env
+.env.*
+!.env.example
+docs/local/
