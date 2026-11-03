@@ -141,3 +141,43 @@ def test_dry_run_writes_nothing(site, exclude_fixture, capsys):
 def test_missing_token_fails_cleanly(site, monkeypatch):
     monkeypatch.delenv("GITHUB_TOKEN", raising=False)
     assert ps.run(ps.parse_args(["--root", str(site)])) == 2
+
+
+class FakePost:
+    """Session stub that records the GraphQL call and returns the calendar fixture."""
+
+    def __init__(self, status=200):
+        self.headers, self.status = None, status
+
+    def post(self, url, json=None, headers=None, timeout=None):
+        self.headers = headers
+        payload = __import__("json").loads((FIXTURES / "calendar.json").read_text(encoding="utf-8"))
+        return type("R", (), {"raise_for_status": lambda self: None, "json": lambda self: payload})()
+
+
+def test_contributions_use_profile_token_first(monkeypatch):
+    session = FakePost()
+    monkeypatch.setenv("PROFILE_STATS_TOKEN", "profile-secret")
+    monkeypatch.setenv("GITHUB_TOKEN", "actions-secret")
+    token, source = ps.skyline.pick_token()
+    ps.fetch_contributions(session, token)
+    assert source == "PROFILE_STATS_TOKEN"
+    assert session.headers["Authorization"] == "bearer profile-secret"
+
+
+def test_run_logs_source_name_and_visibility_never_the_value(site, monkeypatch, capsys):
+    monkeypatch.setenv("PROFILE_STATS_TOKEN", "profile-secret")
+    monkeypatch.setenv("GITHUB_TOKEN", "actions-secret")
+    monkeypatch.setattr(ps, "fetch_repos", lambda session, token: RAW)
+    monkeypatch.setattr(ps, "download_covers", lambda *a, **k: [])
+    assert ps.run(ps.parse_args(["--dry-run", "--root", str(site)]), session=FakePost()) == 0
+    out = capsys.readouterr().out
+    assert "Token source: PROFILE_STATS_TOKEN" in out
+    assert "Private contributions visible: yes" in out
+    assert "secret" not in out
+
+
+def test_offline_skyline_carries_the_breakdown(site, exclude_fixture):
+    ps.run(ps.parse_args(["--offline", "--root", str(site)]))
+    svg = (site / "assets" / "london-skyline.svg").read_text(encoding="utf-8")
+    assert "Code reviews" in svg and "includes private contributions" in svg

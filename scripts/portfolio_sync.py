@@ -10,7 +10,7 @@ Steps:
   4. Rewrite the showcase grid between the SHOWCASE markers in README.md.
 
 Modes:
-  default     call the GitHub API (needs GITHUB_TOKEN)
+  default     call the GitHub API (needs PROFILE_STATS_TOKEN or GITHUB_TOKEN)
   --dry-run   call the API for reads only and print what would change
   --offline   read fixtures from tests/fixtures and make no network call
 
@@ -190,7 +190,7 @@ def fetch_contributions(session, token: str, login: str = OWNER) -> dict:
 
 def build_skyline(payload: dict, login: str = OWNER) -> str:
     weeks = skyline.weeks_from_calendar(skyline.extract_calendar(payload))
-    return skyline.render_svg(weeks, login=login)
+    return skyline.render_svg(weeks, login=login, stats=skyline.extract_stats(payload, login))
 
 
 # Orchestration ------------------------------------------------------------
@@ -208,7 +208,9 @@ def write_if_changed(path: Path, content: str, dry_run: bool) -> bool:
 def run(args, session=None) -> int:
     root = args.root
     covers_dir = root / "assets" / "covers"
-    token = os.environ.get("GITHUB_TOKEN", "").strip()
+    stats_token, stats_source = skyline.pick_token()
+    # GITHUB_TOKEN lists repositories. The stats token is the fallback.
+    token = os.environ.get("GITHUB_TOKEN", "").strip() or stats_token
 
     covers: list[str] = []
     if args.offline:
@@ -216,14 +218,16 @@ def run(args, session=None) -> int:
         payload = json.loads((args.fixtures / "calendar.json").read_text(encoding="utf-8"))
     else:
         if not token:
-            print("GITHUB_TOKEN is not set. Use --offline for fixtures.", file=sys.stderr)
+            print("PROFILE_STATS_TOKEN and GITHUB_TOKEN are not set. Use --offline for fixtures.", file=sys.stderr)
             return 2
         if session is None:
             import requests
             session = requests.Session()
         raw = fetch_repos(session, token)
-        payload = fetch_contributions(session, token)
+        payload = fetch_contributions(session, stats_token)
     repos = select_repos(raw)
+    print(skyline.describe_stats(stats_source if not args.offline else "fixtures",
+                                 skyline.extract_stats(payload, OWNER)))
     if not args.offline:
         covers = download_covers(session, repos, covers_dir, dry_run=args.dry_run)
 
