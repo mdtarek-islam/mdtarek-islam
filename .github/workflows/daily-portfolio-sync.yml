@@ -2,7 +2,8 @@ name: Daily portfolio sync
 
 on:
   schedule:
-    - cron: '0 0 * * *'
+    # 03:23 UTC each day. Off the top of the hour, when scheduled runs often queue.
+    - cron: '23 3 * * *'
   workflow_dispatch:
 
 permissions:
@@ -24,6 +25,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+          cache: pip
+          cache-dependency-path: .github/workflows/daily-portfolio-sync.yml
 
       - name: Install dependencies
         run: python -m pip install requests pytest
@@ -39,6 +42,26 @@ jobs:
           EXCLUDE_REPOS: ${{ secrets.EXCLUDE_REPOS }}
         run: python scripts/portfolio_sync.py
 
+      - name: Validate the generated files
+        run: |
+          python - <<'PY'
+          import pathlib, sys
+          import xml.etree.ElementTree as ET
+          bad = 0
+          for svg in sorted(pathlib.Path("assets").rglob("*.svg")):
+              try:
+                  ET.parse(svg)
+              except ET.ParseError as exc:
+                  print(f"Invalid SVG: {svg}: {exc}")
+                  bad = 1
+          readme = pathlib.Path("README.md").read_text(encoding="utf-8")
+          for mark in ("<!-- SHOWCASE:START -->", "<!-- SHOWCASE:END -->"):
+              if mark not in readme:
+                  print(f"README lost the marker {mark}")
+                  bad = 1
+          sys.exit(bad)
+          PY
+
       - name: Commit changes
         run: |
           if [ -z "$(git status --porcelain -- README.md assets)" ]; then
@@ -50,3 +73,12 @@ jobs:
           git add README.md assets
           git commit -m "chore(profile): daily portfolio sync"
           git push origin HEAD:main
+
+      - name: Check README links
+        continue-on-error: true
+        run: |
+          grep -oE 'https://(raw\.githubusercontent\.com|github\.com)/mdtarek-islam/[^")<> ]+' README.md \
+            | sort -u | while read -r url; do
+              code="$(curl -s -o /dev/null -w '%{http_code}' -L "$url")"
+              if [ "$code" != "200" ]; then echo "::warning::Broken link $url ($code)"; fi
+            done
