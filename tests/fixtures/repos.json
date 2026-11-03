@@ -1,0 +1,9 @@
+[
+  {"name": "alpha-demo", "html_url": "https://github.com/mdtarek-islam/alpha-demo", "visibility": "public", "private": false, "fork": false, "archived": false, "description": "Alpha demo with <b>markup</b>.", "language": "Python", "stargazers_count": 3, "pushed_at": "2026-10-01T10:00:00Z", "default_branch": "main"},
+  {"name": "beta-demo", "html_url": "https://github.com/mdtarek-islam/beta-demo", "visibility": "public", "private": false, "fork": false, "archived": false, "description": "Beta demo.", "language": "Java", "stargazers_count": 3, "pushed_at": "2026-09-01T10:00:00Z", "default_branch": "main"},
+  {"name": "gamma-demo", "html_url": "https://github.com/mdtarek-islam/gamma-demo", "visibility": "public", "private": false, "fork": false, "archived": false, "description": null, "language": null, "stargazers_count": 0, "pushed_at": "2026-08-01T10:00:00Z", "default_branch": "trunk"},
+  {"name": "excluded-fixture", "html_url": "https://github.com/mdtarek-islam/excluded-fixture", "visibility": "public", "private": false, "fork": false, "archived": false, "description": "Must never appear.", "language": "TypeScript", "stargazers_count": 99, "pushed_at": "2026-10-01T10:00:00Z", "default_branch": "main"},
+  {"name": "forked-demo", "visibility": "public", "private": false, "fork": true, "archived": false, "stargazers_count": 50},
+  {"name": "old-demo", "visibility": "public", "private": false, "fork": false, "archived": true, "stargazers_count": 40},
+  {"name": "hidden-demo", "visibility": "private", "private": true, "fork": false, "archived": false, "stargazers_count": 30}
+]

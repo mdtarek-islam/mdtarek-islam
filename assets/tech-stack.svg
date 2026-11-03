@@ -3,20 +3,20 @@
 <desc id="ts-desc">Technologies used across the projects on this profile, with the number of projects that use each one. Languages: Python (8 projects), Java (1 project), TypeScript (1 project). ML and data: PyTorch (3 projects), TensorFlow (2 projects), Keras (2 projects), pandas (2 projects), scikit-learn (1 project), PIL (1 project), Sentence-Transformers (1 project), Sentence-BERT (1 project), Hugging Face (1 project), LangChain (1 project), Pinecone (1 project), ONNX Runtime (1 project). Cloud and infra: AWS Lambda (2 projects), API Gateway (2 projects), Terraform (2 projects), Docker (2 projects), DynamoDB (1 project), GitHub Actions (1 project), Supabase PostgreSQL (1 project), Render (1 project), Vercel (1 project). Web: React 19 (1 project), React Three Fiber (1 project), three.js (1 project), Vite (1 project), Streamlit (1 project), Gradio (1 project), REST APIs (1 project).</desc>
 <style>
 text{font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
-.h{fill:#e6edf3;font-size:15px;font-weight:600}
-.n{fill:#e6edf3;font-size:13px}
-.c{fill:#8b949e;font-size:12px}
-.k{fill:#8b949e;font-size:12px}
-.sep{fill:none;stroke:#30363d;stroke-width:1}
-.ul{fill:none;stroke:#58a6ff;stroke-width:2;stroke-dasharray:200;stroke-dashoffset:0;animation:draw .6s ease-out both}
-.m{fill:#3fb950}
-.bar{fill:#3fb950;fill-opacity:.25}
+.h{fill:#F8FAFC;font-size:15px;font-weight:600}
+.n{fill:#F8FAFC;font-size:13px}
+.c{fill:#A1A1AA;font-size:12px}
+.k{fill:#A1A1AA;font-size:12px}
+.sep{fill:none;stroke:#9F1239;stroke-width:1}
+.ul{fill:none;stroke:#F97316;stroke-width:2;stroke-dasharray:200;stroke-dashoffset:0;animation:draw .6s ease-out both}
+.m{fill:#FBBF24}
+.bar{fill:#FBBF24;fill-opacity:.25}
 .i{animation:in .45s ease-out both}
 @keyframes draw{from{stroke-dashoffset:200}}
 @keyframes in{from{opacity:0;transform:translateY(4px)}}
 @media (prefers-reduced-motion: reduce){*{animation:none!important}}
 </style>
-<rect width="960" height="380" rx="6" fill="#0d1117"/>
+<rect width="960" height="380" rx="6" fill="#0B0F19"/>
 <path class="sep" d="M255 28V336"/>
 <path class="sep" d="M485 28V336"/>
 <path class="sep" d="M715 28V336"/>

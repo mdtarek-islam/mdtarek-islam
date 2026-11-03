@@ -2,13 +2,13 @@
   <title id="t">Profile repository architecture</title>
   <desc id="d">A daily GitHub Actions schedule runs generate_skyline.py. The script reads the contribution calendar through the GitHub GraphQL API, renders london-skyline.svg and commits it only when it changes. The README embeds the skyline with the other SVG assets.</desc>
   <style>
-    .bg { fill: #0d1117; }
-    .node { fill: #161b22; stroke: #30363d; stroke-width: 1; }
-    .out { fill: #161b22; stroke: #3fb950; stroke-width: 1; }
-    .t1 { fill: #e6edf3; font: 600 14px -apple-system, Segoe UI, Helvetica, Arial, sans-serif; }
-    .t2 { fill: #8b949e; font: 12px -apple-system, Segoe UI, Helvetica, Arial, sans-serif; }
-    .wire { fill: none; stroke: #30363d; stroke-width: 2; }
-    .flow { fill: none; stroke: #58a6ff; stroke-width: 2; stroke-dasharray: 10 190; stroke-dashoffset: 200; animation: pulse 3s linear infinite; }
+    .bg { fill: #0B0F19; }
+    .node { fill: #2E1065; stroke: #9F1239; stroke-width: 1; }
+    .out { fill: #2E1065; stroke: #FBBF24; stroke-width: 1; }
+    .t1 { fill: #F8FAFC; font: 600 14px -apple-system, Segoe UI, Helvetica, Arial, sans-serif; }
+    .t2 { fill: #A1A1AA; font: 12px -apple-system, Segoe UI, Helvetica, Arial, sans-serif; }
+    .wire { fill: none; stroke: #9F1239; stroke-width: 2; }
+    .flow { fill: none; stroke: #F97316; stroke-width: 2; stroke-dasharray: 10 190; stroke-dashoffset: 200; animation: pulse 3s linear infinite; }
     .f2 { animation-delay: 0.6s; }
     .f3 { animation-delay: 1.2s; }
     .f4 { animation-delay: 1.8s; }

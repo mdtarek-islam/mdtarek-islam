@@ -1,0 +1,52 @@
+name: Daily portfolio sync
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-portfolio-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: python -m pip install requests pytest
+
+      - name: Test the scripts
+        run: |
+          python -m unittest discover -s scripts -p "test_*.py"
+          python -m pytest tests
+
+      - name: Run the sync
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EXCLUDE_REPOS: ${{ secrets.EXCLUDE_REPOS }}
+        run: python scripts/portfolio_sync.py
+
+      - name: Commit changes
+        run: |
+          if [ -z "$(git status --porcelain -- README.md assets)" ]; then
+            echo "Nothing changed."
+            exit 0
+          fi
+          git config user.name "MD Tarek Islam"
+          git config user.email "md.tarek.mlearn@gmail.com"
+          git add README.md assets
+          git commit -m "chore(profile): daily portfolio sync"
+          git push origin HEAD:main

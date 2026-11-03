@@ -3,8 +3,8 @@
 <p align="center">
 <a href="https://mdtarek.dev"><img src="./assets/badges/portfolio.svg" height="28" alt="Portfolio at mdtarek.dev" /></a>
 <a href="https://www.linkedin.com/in/mdtarek-islam/"><img src="./assets/badges/linkedin.svg" height="28" alt="LinkedIn profile of Md Tarek Islam" /></a>
-<a href="https://g.dev/mdtarek"><img src="https://img.shields.io/badge/Google%20Developer-161b22?style=for-the-badge&logo=google&logoColor=e6edf3" alt="Google Developer profile" /></a>
-<a href="https://github.com/mdtarek-islam"><img src="https://img.shields.io/badge/GitHub-161b22?style=for-the-badge&logo=github&logoColor=e6edf3" alt="GitHub profile of mdtarek-islam" /></a>
+<a href="https://g.dev/mdtarek"><img src="https://img.shields.io/badge/Google%20Developer-4C0519?style=for-the-badge&logo=google&logoColor=F8FAFC" alt="Google Developer profile" /></a>
+<a href="https://github.com/mdtarek-islam"><img src="https://img.shields.io/badge/GitHub-4C0519?style=for-the-badge&logo=github&logoColor=F8FAFC" alt="GitHub profile of mdtarek-islam" /></a>
 </p>
 
 I am a machine learning engineer. I build recommender systems and computer vision pipelines, and I design serverless ML services on AWS Lambda. This page follows that route, from study and work to the projects and the weekly commits.
@@ -86,6 +86,14 @@ Each card links to its repository. A result appears only where a measured number
 - [Comedian Timetable](https://github.com/mdtarek-islam/comedian-timetable): a constraint solver that builds a weekly comedy club timetable. Backtracking with MRV and LCV finds legal schedules, and simulated annealing lowers their cost.
 - [Certifications Vault](https://github.com/mdtarek-islam/certifications-vault): a dated index of 11 course certificates in cloud, machine learning and generative AI, completed in October 2026.
 
+## Public project showcase
+
+This grid rebuilds each day from the public repositories of this account. Each card shows the name, a short description, the main language and the star count.
+
+<!-- SHOWCASE:START -->
+The grid fills on the first scheduled run.
+<!-- SHOWCASE:END -->
+
 ## Under the bonnet
 
 <p align="center">
@@ -98,7 +106,7 @@ Each card links to its repository. A result appears only where a measured number
   <img src="./assets/london-skyline.svg" width="100%" alt="Night skyline of London over the Thames Embankment. Each of 52 buildings is one week of GitHub contributions, with 7 windows for the days. The London Eye, St Paul's Cathedral, the Gherkin, Tower Bridge and the Shard stand behind, and traffic runs both ways along the river road." />
 </p>
 
-Each building is one week of GitHub contributions over the last 52 weeks. Its height follows the weekly total. The 7 windows are the days, with Sunday at the top. Brighter windows mark busier days, on quartile levels like the GitHub calendar. A scheduled workflow redraws the scene each day with [`scripts/generate_skyline.py`](./scripts/generate_skyline.py). Until the first run, the graph shows a zero-data baseline.
+Each building is one week of GitHub contributions over the last 52 weeks. Its height follows the weekly total. The 7 windows are the days, with Sunday at the top. Brighter windows mark busier days, on quartile levels like the GitHub calendar. A scheduled workflow redraws the scene each day through [`scripts/portfolio_sync.py`](./scripts/portfolio_sync.py), which calls [`scripts/generate_skyline.py`](./scripts/generate_skyline.py). Until the first run, the graph shows a zero-data baseline.
 
 ## Certifications
 
@@ -109,12 +117,12 @@ Each building is one week of GitHub contributions over the last 52 weeks. Its he
 <p align="center">
 <a href="https://mdtarek.dev"><img src="./assets/badges/portfolio.svg" height="28" alt="Portfolio at mdtarek.dev" /></a>
 <a href="https://www.linkedin.com/in/mdtarek-islam/"><img src="./assets/badges/linkedin.svg" height="28" alt="LinkedIn profile of Md Tarek Islam" /></a>
-<a href="https://github.com/mdtarek-islam"><img src="https://img.shields.io/badge/GitHub-161b22?style=for-the-badge&logo=github&logoColor=e6edf3" alt="GitHub profile of mdtarek-islam" /></a>
-<a href="https://g.dev/mdtarek"><img src="https://img.shields.io/badge/Google%20Developer-161b22?style=for-the-badge&logo=google&logoColor=e6edf3" alt="Google Developer profile" /></a>
+<a href="https://github.com/mdtarek-islam"><img src="https://img.shields.io/badge/GitHub-4C0519?style=for-the-badge&logo=github&logoColor=F8FAFC" alt="GitHub profile of mdtarek-islam" /></a>
+<a href="https://g.dev/mdtarek"><img src="https://img.shields.io/badge/Google%20Developer-4C0519?style=for-the-badge&logo=google&logoColor=F8FAFC" alt="Google Developer profile" /></a>
 <br />
-<a href="https://leetcode.com/u/md_tarek_islam/"><img src="https://img.shields.io/badge/LeetCode-161b22?style=for-the-badge&logo=leetcode&logoColor=e6edf3" alt="LeetCode profile" /></a>
-<a href="https://www.hackerrank.com/profile/md_tarek_mlearn"><img src="https://img.shields.io/badge/HackerRank-161b22?style=for-the-badge&logo=hackerrank&logoColor=e6edf3" alt="HackerRank profile" /></a>
-<a href="https://www.geeksforgeeks.org/profile/mdtarekmwny"><img src="https://img.shields.io/badge/GeeksforGeeks-161b22?style=for-the-badge&logo=geeksforgeeks&logoColor=e6edf3" alt="GeeksforGeeks profile" /></a>
+<a href="https://leetcode.com/u/md_tarek_islam/"><img src="https://img.shields.io/badge/LeetCode-4C0519?style=for-the-badge&logo=leetcode&logoColor=F8FAFC" alt="LeetCode profile" /></a>
+<a href="https://www.hackerrank.com/profile/md_tarek_mlearn"><img src="https://img.shields.io/badge/HackerRank-4C0519?style=for-the-badge&logo=hackerrank&logoColor=F8FAFC" alt="HackerRank profile" /></a>
+<a href="https://www.geeksforgeeks.org/profile/mdtarekmwny"><img src="https://img.shields.io/badge/GeeksforGeeks-4C0519?style=for-the-badge&logo=geeksforgeeks&logoColor=F8FAFC" alt="GeeksforGeeks profile" /></a>
 </p>
 
 <details>
@@ -122,34 +130,37 @@ Each building is one week of GitHub contributions over the last 52 weeks. Its he
 
 #### Overview
 
-This repository holds the GitHub profile page for mdtarek-islam. The page is a README with four SVG scenes and two original badges.
+This repository holds the GitHub profile page for mdtarek-islam. The page is a README with four SVG scenes, two original badges and a showcase grid that a script keeps current.
 
 #### Architecture
 
-The README embeds the SVG files in [`assets/`](./assets). [`scripts/generate_skyline.py`](./scripts/generate_skyline.py) reads the GitHub GraphQL contribution calendar and writes `assets/london-skyline.svg`.
+The README embeds the SVG files in [`assets/`](./assets). [`scripts/portfolio_sync.py`](./scripts/portfolio_sync.py) lists the public repositories, downloads their cover images into `assets/covers/` and rewrites the showcase grid. It also reads the GitHub GraphQL contribution calendar and, through [`scripts/generate_skyline.py`](./scripts/generate_skyline.py), writes `assets/london-skyline.svg`.
 
 #### Features
 
 - Animated SVG scenes. Each one stops all motion under `prefers-reduced-motion`.
 - A skyline graph that a scheduled workflow redraws each day.
-- Unit tests for the generator, run before every redraw.
+- A showcase grid of public projects, rebuilt each day.
+- Unit tests for both scripts, run before every sync.
 
 #### Quick start
 
 ```bash
 python scripts/generate_skyline.py --offline
+python scripts/portfolio_sync.py --offline --dry-run
 python -m unittest discover -s scripts -p "test_*.py"
+python -m pytest tests
 ```
 
-The first command writes the zero-data baseline. The second runs the tests.
+The first command writes the zero-data baseline. The second previews a sync from fixtures. The last two run the tests.
 
 #### Configuration
 
-Set `GITHUB_TOKEN` to fetch real data. Use `--login` to chart another user, `--output` to change the file and `--input` to render a saved GraphQL response.
+Set `GITHUB_TOKEN` to fetch real data. `portfolio_sync.py` takes `--dry-run`, `--offline`, `--fixtures` and `--root`. `generate_skyline.py` takes `--login` to chart another user, `--output` to change the file and `--input` to render a saved GraphQL response.
 
 #### Usage
 
-[`.github/workflows/update-skyline.yml`](./.github/workflows/update-skyline.yml) runs each day at 03:17 UTC. It tests the generator, renders the skyline and commits the SVG when it changes.
+[`.github/workflows/daily-portfolio-sync.yml`](./.github/workflows/daily-portfolio-sync.yml) runs each day at 00:00 UTC. It tests the scripts, runs the sync and commits changed files to `main`.
 
 #### Licence and contribution
 

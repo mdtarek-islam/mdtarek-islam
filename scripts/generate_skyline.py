@@ -39,19 +39,26 @@ QUERY = (
     "date contributionCount } } } } } }"
 )
 
-# Design tokens. Colours follow the GitHub dark palette used across the profile.
+# Design tokens. Colours follow the Sunset ramp in DESIGN.md.
 TOKENS = {
-    "canvas": "#0d1117",
-    "surface": "#161b22",
-    "border": "#30363d",
-    "text": "#e6edf3",
-    "muted": "#8b949e",
-    "accent": "#58a6ff",
-    "lamp": "#d29922",
-    "window": "#e3b341",
-    "window_hot": "#f2cc60",
-    "window_off": "#21262d",
-    "tail": "#f85149",
+    "canvas": "#0B0F19",
+    "surface": "#0B0F19",
+    "border": "#9F1239",
+    "text": "#F8FAFC",
+    "muted": "#A1A1AA",
+    "accent": "#F97316",
+    "lamp": "#F59E0B",
+    "window": "#F59E0B",
+    "window_hot": "#FBBF24",
+    "window_off": "#2E1065",
+    "tail": "#F43F5E",
+    "indigo": "#2E1065",
+    "deep": "#4C0519",
+    "violet": "#7C3AED",
+    "rose": "#F43F5E",
+    "coral": "#FB7185",
+    "crimson": "#DC2626",
+    "gold": "#FBBF24",
 }
 FONT = '-apple-system,"Segoe UI",Helvetica,Arial,sans-serif'
 
@@ -82,17 +89,17 @@ text{{font-family:{FONT}}}
 .s{{fill:{T['muted']};font-size:12px}}
 .c{{fill:{T['text']};font-size:13px}}
 .pkt{{fill:{T['accent']};font-size:12px}}
-.lm{{fill:{T['surface']};stroke:{T['muted']};stroke-opacity:.4;stroke-width:1}}
-.ln{{fill:none;stroke:{T['muted']};stroke-opacity:.4;stroke-width:1}}
-.cap{{fill:{T['muted']};fill-opacity:.55}}
-.st{{fill:{T['muted']}}}
+.lm{{fill:{T['indigo']};stroke:{T['rose']};stroke-opacity:.45;stroke-width:1}}
+.ln{{fill:none;stroke:{T['rose']};stroke-opacity:.45;stroke-width:1}}
+.cap{{fill:{T['gold']};fill-opacity:.7}}
+.st{{fill:{T['text']}}}
 .moon{{fill:{T['text']};fill-opacity:.85}}
 .eye{{transform-box:fill-box;transform-origin:center;animation:spin 150s linear infinite}}
 .bc{{fill:{T['tail']};animation:blink 2.4s ease-in-out infinite}}
-.bd{{fill:{T['canvas']};stroke:{T['border']};stroke-width:1}}
+.bd{{fill:{T['deep']};stroke:{T['border']};stroke-width:1}}
 .b{{transform-box:fill-box;transform-origin:50% 100%;animation:rise .7s cubic-bezier(.2,.7,.3,1) both}}
 .w0{{fill:{T['window_off']}}}
-.w1{{fill:{T['window']};fill-opacity:.3}}
+.w1{{fill:{T['window']};fill-opacity:.35}}
 .w2{{fill:{T['window']};fill-opacity:.55}}
 .w3{{fill:{T['window']};fill-opacity:.8}}
 .w4{{fill:{T['window_hot']}}}
@@ -107,11 +114,11 @@ text{{font-family:{FONT}}}
 .tt{{fill:{T['tail']};fill-opacity:.3}}
 .east{{animation:east 6s linear infinite}}
 .west{{animation:west 7.5s linear infinite}}
-.water{{fill:{T['accent']};fill-opacity:.04}}
+.water{{fill:{T['accent']};fill-opacity:.08}}
 .rf{{fill:url(#sk-fade)}}
 .shim{{animation:shim 4.8s ease-in-out infinite alternate}}
 .shim.s2{{animation-delay:-2.4s}}
-.rip{{fill:none;stroke:{T['accent']};stroke-opacity:.3;stroke-width:1;stroke-dasharray:8 18;animation:flow 10s linear infinite}}
+.rip{{fill:none;stroke:{T['gold']};stroke-opacity:.35;stroke-width:1;stroke-dasharray:8 18;animation:flow 10s linear infinite}}
 .rip.r2{{stroke-opacity:.18;animation-duration:14s;animation-direction:reverse}}
 .pk{{fill:{T['accent']}}}
 @keyframes rise{{from{{transform:scaleY(0)}}}}
@@ -494,8 +501,10 @@ def render_svg(weeks: list[dict], login: str = DEFAULT_LOGIN, offline: bool = Fa
     defs = (
         "<defs>"
         '<linearGradient id="sk-sky" x1="0" y1="0" x2="0" y2="1">'
-        f'<stop offset="0" stop-color="{T["canvas"]}"/>'
-        f'<stop offset="1" stop-color="{T["surface"]}"/>'
+        f'<stop offset="0" stop-color="{T["indigo"]}"/>'
+        f'<stop offset="0.5" stop-color="{T["border"]}"/>'
+        f'<stop offset="0.82" stop-color="{T["accent"]}"/>'
+        f'<stop offset="1" stop-color="{T["gold"]}"/>'
         "</linearGradient>"
         '<linearGradient id="sk-fade" x1="0" y1="0" x2="0" y2="1">'
         f'<stop offset="0" stop-color="{T["window"]}" stop-opacity=".5"/>'
