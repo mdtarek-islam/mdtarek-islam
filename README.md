@@ -87,21 +87,35 @@ This grid rebuilds each day from the public repositories of this account. Each c
 <table>
 <tr>
 <td width="50%" valign="top">
-<a href="https://github.com/mdtarek-islam/biomecha-rag"><img src="./assets/covers/biomecha-rag.webp" width="100%" alt="biomecha-rag emblem" /></a>
-<h3><a href="https://github.com/mdtarek-islam/biomecha-rag">biomecha-rag</a></h3>
+<a href="https://github.com/mdtarek-islam/agentic-workflows"><img src="./assets/covers/agentic-workflows.webp" width="100%" alt="agentic-workflows emblem" /></a>
+<h3><a href="https://github.com/mdtarek-islam/agentic-workflows">agentic-workflows</a></h3>
+<p>A reference showcase of agentic architectures that run real fleet maintenance.</p>
 <p><sub>Python, 0 stars</sub></p>
 </td>
 <td width="50%" valign="top">
-<a href="https://github.com/mdtarek-islam/certifications-vault"><img src="./assets/covers/certifications-vault.webp" width="100%" alt="certifications-vault emblem" /></a>
-<h3><a href="https://github.com/mdtarek-islam/certifications-vault">certifications-vault</a></h3>
+<a href="https://github.com/mdtarek-islam/biomecha-rag"><img src="./assets/covers/biomecha-rag.webp" width="100%" alt="biomecha-rag emblem" /></a>
+<h3><a href="https://github.com/mdtarek-islam/biomecha-rag">biomecha-rag</a></h3>
 <p><sub>Python, 0 stars</sub></p>
 </td>
 </tr>
 <tr>
 <td width="50%" valign="top">
+<a href="https://github.com/mdtarek-islam/certifications-vault"><img src="./assets/covers/certifications-vault.webp" width="100%" alt="certifications-vault emblem" /></a>
+<h3><a href="https://github.com/mdtarek-islam/certifications-vault">certifications-vault</a></h3>
+<p><sub>Python, 0 stars</sub></p>
+</td>
+<td width="50%" valign="top">
 <a href="https://github.com/mdtarek-islam/comedian-timetable"><img src="./assets/covers/comedian-timetable.webp" width="100%" alt="comedian-timetable emblem" /></a>
 <h3><a href="https://github.com/mdtarek-islam/comedian-timetable">comedian-timetable</a></h3>
 <p><sub>Python, 0 stars</sub></p>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+<a href="https://github.com/mdtarek-islam/exploring-java"><img src="./assets/covers/exploring-java.webp" width="100%" alt="exploring-java emblem" /></a>
+<h3><a href="https://github.com/mdtarek-islam/exploring-java">exploring-java</a></h3>
+<p>A Java 21 package moves from language basics, generics, streams and concurrency to trees, heaps, tries, shortest paths and dynamic programming.</p>
+<p><sub>Java, 0 stars</sub></p>
 </td>
 <td width="50%" valign="top">
 <a href="https://github.com/mdtarek-islam/luminovels"><img src="./assets/covers/luminovels.webp" width="100%" alt="luminovels emblem" /></a>
@@ -111,33 +125,47 @@ This grid rebuilds each day from the public repositories of this account. Each c
 </tr>
 <tr>
 <td width="50%" valign="top">
+<a href="https://github.com/mdtarek-islam/machine-learning"><img src="./assets/covers/machine-learning.webp" width="100%" alt="machine-learning emblem" /></a>
+<h3><a href="https://github.com/mdtarek-islam/machine-learning">machine-learning</a></h3>
+<p>Six small Docker applications cover linear models, tree ensembles, SVMs, clustering, neural networks and time series.</p>
+<p><sub>Jupyter Notebook, 0 stars</sub></p>
+</td>
+<td width="50%" valign="top">
 <a href="https://github.com/mdtarek-islam/ml-stock-market-analysis"><img src="./assets/covers/ml-stock-market-analysis.webp" width="100%" alt="ml-stock-market-analysis emblem" /></a>
 <h3><a href="https://github.com/mdtarek-islam/ml-stock-market-analysis">ml-stock-market-analysis</a></h3>
 <p><sub>Python, 0 stars</sub></p>
 </td>
+</tr>
+<tr>
 <td width="50%" valign="top">
 <a href="https://github.com/mdtarek-islam/recommal"><img src="./assets/covers/recommal.webp" width="100%" alt="recommal emblem" /></a>
 <h3><a href="https://github.com/mdtarek-islam/recommal">recommal</a></h3>
 <p><sub>Python, 0 stars</sub></p>
 </td>
-</tr>
-<tr>
 <td width="50%" valign="top">
 <a href="https://github.com/mdtarek-islam/reinforced-ln"><img src="./assets/covers/reinforced-ln.webp" width="100%" alt="reinforced-ln emblem" /></a>
 <h3><a href="https://github.com/mdtarek-islam/reinforced-ln">reinforced-ln</a></h3>
 <p><sub>Python, 0 stars</sub></p>
 </td>
+</tr>
+<tr>
 <td width="50%" valign="top">
 <a href="https://github.com/mdtarek-islam/rental-oop"><img src="./assets/covers/rental-oop.webp" width="100%" alt="rental-oop emblem" /></a>
 <h3><a href="https://github.com/mdtarek-islam/rental-oop">rental-oop</a></h3>
 <p><sub>Python, 0 stars</sub></p>
 </td>
-</tr>
-<tr>
 <td width="50%" valign="top">
 <a href="https://github.com/mdtarek-islam/serverless-tel-parser"><img src="./assets/covers/serverless-tel-parser.webp" width="100%" alt="serverless-tel-parser emblem" /></a>
 <h3><a href="https://github.com/mdtarek-islam/serverless-tel-parser">serverless-tel-parser</a></h3>
 <p><sub>Python, 0 stars</sub></p>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+<a href="https://github.com/mdtarek-islam/understanding-python"><img src="./assets/covers/understanding-python.webp" width="100%" alt="understanding-python emblem" /></a>
+<h3><a href="https://github.com/mdtarek-islam/understanding-python">understanding-python</a></h3>
+<p>Eight runnable notebooks move from CPython internals and the memory model to OOP design and advanced data structures and algorithms.</p>
+<p><sub>Jupyter Notebook, 0 stars</sub></p>
 </td>
 <td width="50%" valign="top">
 <a href="https://github.com/mdtarek-islam/watermark-detector"><img src="./assets/covers/watermark-detector.webp" width="100%" alt="watermark-detector emblem" /></a>
