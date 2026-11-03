@@ -67,14 +67,7 @@ Each card links to its repository. A result appears only where a measured number
 <p><sub><b>Stack:</b> Python, PyTorch, ONNX Runtime, Docker, AWS Lambda, API Gateway, DynamoDB, Terraform</sub></p>
 <p><b>Result:</b> no measured metrics yet.<br /><sub>The cold start under 200 ms is a design target, not a measurement.</sub></p>
 </td>
-<td width="50%" valign="top">
-<a href="https://mdtarek.dev"><img src="./assets/covers/portfolio-3d.webp" width="100%" alt="Portfolio 3D cover image" /></a>
-<h3><a href="https://mdtarek.dev">Portfolio 3D</a></h3>
-<sub>Oct 2026. Private repository, live at mdtarek.dev</sub>
-<p>An interactive 3D portfolio site built with React 19, React Three Fiber and Vite, deployed on Vercel.</p>
-<p><sub><b>Stack:</b> TypeScript, React 19, React Three Fiber, three.js, Vite, Vercel</sub></p>
-<p><b>Result:</b> no measured metrics yet.</p>
-</td>
+<td width="50%" valign="top"></td>
 </tr>
 </table>
 
