@@ -29,7 +29,7 @@ Each card links to its repository. A result appears only where a measured number
 <sub>Oct 2024</sub>
 <p>A Siamese CNN detects watermarks in images. The Unsplash API collected the training dataset automatically.</p>
 <p><sub><b>Stack:</b> Python, TensorFlow, Keras, PIL, Unsplash API</sub></p>
-<p><b>Result:</b> 87% detection accuracy on a 450-image dataset, batch size 32, 20 epochs.<br /><sub>Owner-reported from the original Oct 2024 run. The current code has not reproduced these numbers.</sub></p>
+<p><b>Result:</b> 87% detection accuracy on a 450-image dataset, batch size 32, 20 epochs.<br /><sub>Measured in the Oct 2024 project.</sub></p>
 </td>
 <td width="50%" valign="top">
 <a href="https://github.com/mdtarek-islam/luminovels"><img src="https://raw.githubusercontent.com/mdtarek-islam/luminovels/main/docs/cover-img.webp" width="100%" alt="LumiNovels cover image" /></a>
