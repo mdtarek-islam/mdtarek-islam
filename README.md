@@ -89,7 +89,7 @@ This grid rebuilds each day from the public repositories of this account. Each c
 <td width="50%" valign="top">
 <a href="https://github.com/mdtarek-islam/agentic-workflows"><img src="./assets/covers/agentic-workflows.webp" width="100%" alt="agentic-workflows emblem" /></a>
 <h3><a href="https://github.com/mdtarek-islam/agentic-workflows">agentic-workflows</a></h3>
-<p>A reference showcase of agentic architectures that run real fleet maintenance.</p>
+<p>Open blueprints for repository maintenance and CI/CD governance, plus three documented production case studies in email, invoicing and knowledge support.</p>
 <p><sub>Python, 0 stars</sub></p>
 </td>
 <td width="50%" valign="top">
@@ -114,7 +114,7 @@ This grid rebuilds each day from the public repositories of this account. Each c
 <td width="50%" valign="top">
 <a href="https://github.com/mdtarek-islam/exploring-java"><img src="./assets/covers/exploring-java.webp" width="100%" alt="exploring-java emblem" /></a>
 <h3><a href="https://github.com/mdtarek-islam/exploring-java">exploring-java</a></h3>
-<p>A Java 21 package moves from language basics, generics, streams and concurrency to trees, heaps, tries, shortest paths and dynamic programming.</p>
+<p>Fourteen Java 21 packages move from the JVM memory model, OOP and virtual threads to trees, tries, graphs and dynamic programming, each with captured output.</p>
 <p><sub>Java, 0 stars</sub></p>
 </td>
 <td width="50%" valign="top">
@@ -127,7 +127,7 @@ This grid rebuilds each day from the public repositories of this account. Each c
 <td width="50%" valign="top">
 <a href="https://github.com/mdtarek-islam/machine-learning"><img src="./assets/covers/machine-learning.webp" width="100%" alt="machine-learning emblem" /></a>
 <h3><a href="https://github.com/mdtarek-islam/machine-learning">machine-learning</a></h3>
-<p>Six small Docker applications cover linear models, tree ensembles, SVMs, clustering, neural networks and time series.</p>
+<p>Ten Dockerised modules and executed reports cover statistics, regression, kernels, ensembles, clustering, semi-supervised learning, CNNs, Siamese networks, LSTMs and PPO.</p>
 <p><sub>Jupyter Notebook, 0 stars</sub></p>
 </td>
 <td width="50%" valign="top">
@@ -164,7 +164,7 @@ This grid rebuilds each day from the public repositories of this account. Each c
 <td width="50%" valign="top">
 <a href="https://github.com/mdtarek-islam/understanding-python"><img src="./assets/covers/understanding-python.webp" width="100%" alt="understanding-python emblem" /></a>
 <h3><a href="https://github.com/mdtarek-islam/understanding-python">understanding-python</a></h3>
-<p>Eight runnable notebooks move from CPython internals and the memory model to OOP design and advanced data structures and algorithms.</p>
+<p>Eleven executed Python 3.13 notebooks move from the memory model, typing and concurrency to graphs, dynamic programming and complexity benchmarks.</p>
 <p><sub>Jupyter Notebook, 0 stars</sub></p>
 </td>
 <td width="50%" valign="top">
