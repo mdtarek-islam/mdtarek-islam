@@ -216,7 +216,7 @@ Set `GITHUB_TOKEN` to fetch real data. `portfolio_sync.py` takes `--dry-run`, `-
 
 #### Usage
 
-[`.github/workflows/daily-portfolio-sync.yml`](./.github/workflows/daily-portfolio-sync.yml) runs each day at 00:00 UTC. It tests the scripts, runs the sync and commits changed files to `main`.
+[`.github/workflows/daily-portfolio-sync.yml`](./.github/workflows/daily-portfolio-sync.yml) runs each day at 08:00 UTC. It tests the scripts, runs the sync and commits changed files to `main`.
 
 #### Licence and contribution
 

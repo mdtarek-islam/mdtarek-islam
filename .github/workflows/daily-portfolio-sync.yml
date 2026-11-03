@@ -2,8 +2,8 @@ name: Daily portfolio sync
 
 on:
   schedule:
-    # 00:00 UTC each day. See docs/MAINTENANCE.md.
-    - cron: '0 0 * * *'
+    # 08:00 UTC each day. See docs/MAINTENANCE.md.
+    - cron: '0 8 * * *'
   workflow_dispatch:
 
 permissions:

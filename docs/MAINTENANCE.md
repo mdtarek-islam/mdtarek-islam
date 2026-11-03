@@ -4,7 +4,7 @@ This guide covers the daily workflow that keeps the profile page current.
 
 ## Schedule
 
-1. [`daily-portfolio-sync.yml`](../.github/workflows/daily-portfolio-sync.yml) runs each day at 00:00 UTC.
+1. [`daily-portfolio-sync.yml`](../.github/workflows/daily-portfolio-sync.yml) runs each day at 08:00 UTC.
 2. GitHub can start a scheduled run up to about 30 minutes late at busy times.
 3. Start a run at any time: Actions tab, "Daily portfolio sync", "Run workflow".
 4. From a terminal, run `gh workflow run daily-portfolio-sync.yml -R mdtarek-islam/mdtarek-islam`.
@@ -36,6 +36,14 @@ This guide covers the daily workflow that keeps the profile page current.
 4. **Review dependabot pull requests weekly.** They keep the workflow actions current. Merge them when the checks pass.
 5. **Act on failure emails.** GitHub emails the owner when a scheduled run fails. Read the failed step in the run log.
 6. **Hide a repository from the showcase.** Add its name to the `EXCLUDE_REPOS` secret. Private repositories never appear.
+
+## How to read the skyline
+
+1. Each building is one week, from Sunday to Saturday. The newest week is on the right.
+2. Building height follows that week's contribution total. The busiest week reaches full height. Every other week scales linearly against it.
+3. The number on the tallest building is the busiest week's total. The caption names that week as "Peak week of <Sunday date>".
+4. Each building has 7 windows, one per day, with Sunday at the top. Brighter windows mark busier days.
+5. An empty week keeps a short building with dark windows.
 
 ## What the skyline numbers mean
 
