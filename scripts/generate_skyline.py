@@ -11,7 +11,9 @@ Window brightness uses quartiles of the non-zero daily counts, like the
 GitHub contribution calendar. The script uses the standard library only.
 
 Modes:
-  default    fetch the calendar from the GitHub GraphQL API (needs GITHUB_TOKEN)
+  default    fetch the calendar and activity totals from the GitHub GraphQL API.
+             Reads PROFILE_STATS_TOKEN first, then GITHUB_TOKEN. Only a token
+             owned by the profile user shows private contributions in full.
   --input    render from a saved GraphQL response or calendar JSON file
   --offline  render an honest zero-data baseline
 """
@@ -33,10 +35,26 @@ DEFAULT_LOGIN = "mdtarek-islam"
 DEFAULT_OUTPUT = Path(__file__).resolve().parent.parent / "assets" / "london-skyline.svg"
 OFFLINE_CAPTION = "Contribution data loads on the first scheduled run"
 
+TOKEN_ENV_NAMES = ("PROFILE_STATS_TOKEN", "GITHUB_TOKEN")
 QUERY = (
-    "query($login: String!) { user(login: $login) { contributionsCollection { "
+    "query($login: String!) { viewer { login } user(login: $login) { contributionsCollection { "
     "contributionCalendar { totalContributions weeks { contributionDays { "
-    "date contributionCount } } } } } }"
+    "date contributionCount } } } "
+    "totalCommitContributions totalPullRequestReviewContributions "
+    "totalPullRequestContributions totalIssueContributions "
+    "totalRepositoryContributions restrictedContributionsCount "
+    "commitContributionsByRepository(maxRepositories: 100) { "
+    "repository { isPrivate } contributions { totalCount } } } } }"
+)
+
+# Breakdown strip: key, label, palette token.
+BREAKDOWN = (
+    ("commits", "Commits", "gold"),
+    ("reviews", "Code reviews", "window"),
+    ("pull_requests", "Pull requests", "accent"),
+    ("issues", "Issues", "coral"),
+    ("repositories", "New repositories", "rose"),
+    ("private", "Private", "violet"),
 )
 
 # Design tokens. Colours follow the Sunset ramp in DESIGN.md.
@@ -64,7 +82,7 @@ FONT = '-apple-system,"Segoe UI",Helvetica,Arial,sans-serif'
 
 WEEKS = 52
 DAYS = 7
-WIDTH, HEIGHT = 960, 440
+WIDTH, HEIGHT = 960, 520
 GROUND = 300            # base of the buildings and top of the road
 ROAD_BOTTOM = 328
 RIVER_TOP = 346
@@ -77,12 +95,163 @@ WIN_BAND = DAYS * WIN_PITCH - (WIN_PITCH - WIN_H)   # 40 px from top window to b
 MIN_H = WIN_BAND + 12                                # an empty week still shows its 7 windows
 MAX_H = 130
 STAGGER_MS = 7
-LANE_TILE = 240
+STRIP_TOP = 446          # top rule of the activity breakdown strip
+CELL_W = 147
+BAR_MAX = 128
+BAR_H = 6
+BAR_STAGGER_MS = 90
+# Traffic. UK roads drive on the left. Seen from the south bank, the far lane
+# flows east (left to right) and the near lane flows west (right to left).
+FAR_LANE_Y = GROUND + 14       # tyre line of the far, eastbound lane
+NEAR_LANE_Y = ROAD_BOTTOM - 2  # tyre line of the near, westbound lane
+MID_Y = GROUND + 16.5          # static centre line between the carriageways
+BEAM = 26                      # headlight beam length ahead of the nose
+MAX_LEN = 46                   # longest vehicle, the bus
+EAST_FROM, EAST_TO = -(BEAM + MAX_LEN + 8), WIDTH + 8
+WEST_FROM, WEST_TO = WIDTH + BEAM + 8, -(MAX_LEN + 8)
+EAST_S, WEST_S = 16, 20        # one speed per lane, so cars in a lane never close up
+# (vehicle kind, start fraction along the lane). Gaps stay above 0.2 of the lane.
+EAST_FLEET = (("hatch", 0.06), ("saloon", 0.31), ("cab", 0.55), ("silver", 0.8))
+WEST_FLEET = (("bus", 0.14), ("hatch", 0.4), ("cab", 0.63), ("saloon", 0.87))
 
 MONTHS = ("Jan", "Feb", "Mar", "Apr", "May", "Jun",
           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 
 T = TOKENS
+# Vehicle and lane styles. header-banner.svg carries a copy of this block.
+VEHICLE_STYLE = f"""\
+.east{{animation:east {EAST_S}s linear infinite}}
+.west{{animation:west {WEST_S}s linear infinite}}
+@keyframes east{{from{{transform:translateX({EAST_FROM}px)}}to{{transform:translateX({EAST_TO}px)}}}}
+@keyframes west{{from{{transform:translateX({WEST_FROM}px)}}to{{transform:translateX({WEST_TO}px)}}}}
+.vb{{stroke:{T['canvas']};stroke-width:.6;stroke-linejoin:round}}
+.k-hatch{{fill:{T['text']}}}
+.k-saloon{{fill:{T['violet']}}}
+.k-silver{{fill:{T['muted']}}}
+.k-cab{{fill:{T['canvas']};stroke:{T['muted']};stroke-opacity:.8}}
+.k-bus{{fill:{T['crimson']}}}
+.gl{{fill:{T['indigo']}}}
+.k-cab~.gl{{fill:{T['muted']};fill-opacity:.3}}
+.bw{{fill:{T['gold']};fill-opacity:.8}}
+.sign{{fill:{T['lamp']}}}
+.ty{{fill:{T['canvas']};stroke:{T['muted']};stroke-opacity:.6;stroke-width:.6}}
+.hub{{fill:{T['muted']}}}
+.hl{{fill:{T['text']}}}
+.hb.e{{fill:url(#beam-e)}}
+.hb.w{{fill:url(#beam-w)}}
+.tl{{fill:{T['tail']}}}
+.th{{fill:url(#tail-glow)}}"""
+VEHICLE_DEFS = (
+    '<linearGradient id="beam-e" x1="0" y1="0" x2="1" y2="0">'
+    f'<stop offset="0" stop-color="{T["text"]}" stop-opacity=".55"/>'
+    f'<stop offset=".35" stop-color="{T["gold"]}" stop-opacity=".2"/>'
+    f'<stop offset="1" stop-color="{T["gold"]}" stop-opacity="0"/></linearGradient>'
+    '<linearGradient id="beam-w" x1="1" y1="0" x2="0" y2="0">'
+    f'<stop offset="0" stop-color="{T["text"]}" stop-opacity=".55"/>'
+    f'<stop offset=".35" stop-color="{T["gold"]}" stop-opacity=".2"/>'
+    f'<stop offset="1" stop-color="{T["gold"]}" stop-opacity="0"/></linearGradient>'
+    '<radialGradient id="tail-glow">'
+    f'<stop offset="0" stop-color="{T["tail"]}" stop-opacity=".6"/>'
+    f'<stop offset="1" stop-color="{T["tail"]}" stop-opacity="0"/></radialGradient>'
+)
+
+# Side-view vehicles drawn facing east: x runs from the rear (0) to the nose,
+# y runs up from the tyre line (0) as negative numbers. A west-bound vehicle is
+# the exact mirror, so its lamps and beam always sit on the leading end.
+_SALOON = dict(
+    length=32, wheels=(7, 25), lamp=-6.8, tail=-7.6,
+    body=((1, -2.5), (0.4, -6.6), (1.6, -8.6), (8.6, -9.2), (12.2, -13.6), (21, -13.6),
+          (25.6, -9.2), (30.4, -8.4), (32, -6.2), (31.6, -2.5)),
+    glass=(((12.8, -12.8), (16.6, -12.8), (16.6, -9.8), (10.2, -9.8)),
+           ((17.4, -12.8), (20.6, -12.8), (23.8, -9.8), (17.4, -9.8))),
+)
+VEHICLES = {
+    "hatch": dict(
+        length=27, wheels=(6, 21), lamp=-6.6, tail=-8.2,
+        body=((1, -2.5), (0.4, -7), (1.2, -11.8), (3.6, -13.4), (13.6, -13.4), (18.6, -9),
+              (25, -8.2), (26.8, -6.4), (26.4, -2.5)),
+        glass=(((4.2, -12.6), (9.2, -12.6), (9.2, -9.8), (2.2, -9.8)),
+               ((10.2, -12.6), (13.2, -12.6), (16.6, -9.8), (10.2, -9.8))),
+    ),
+    "saloon": _SALOON,
+    "silver": _SALOON,
+    "cab": dict(
+        length=31, wheels=(6.5, 24.5), lamp=-7, tail=-8.6, sign=(9, -17.6, 4.6, 1.6),
+        body=((1, -2.5), (0.5, -8.4), (1.6, -14.6), (4, -16), (17.6, -16), (22.4, -10.4),
+              (29, -9.2), (30.8, -6.6), (30.4, -2.5)),
+        glass=(((3.2, -15), (9.8, -15), (9.8, -10.8), (2.4, -10.8)),
+               ((10.8, -15), (17, -15), (20.6, -10.8), (10.8, -10.8))),
+    ),
+    "bus": dict(
+        length=MAX_LEN, wheels=(8, 37), lamp=-5.4, tail=-6.4, radius=3.2,
+        body=((0.4, -2.5), (0, -20), (1, -21.4), (45, -21.4), (46, -20), (45.6, -2.5)),
+        lit=tuple((x, -19.4, 5.6, 4.6) for x in (2, 9, 16, 23, 30, 37))
+        + ((41.4, -19.4, 3.8, 4.6),)
+        + tuple((x, -12.6, 5.6, 4.4) for x in (2, 9, 16, 23, 30))
+        + ((40.4, -13.4, 4.8, 6),),
+    ),
+}
+
+
+def _n(value: float) -> str:
+    return f"{round(value, 1) + 0.0:g}"
+
+
+def vehicle(kind: str, east: bool) -> str:
+    """Markup for one vehicle, nose leading in the direction of travel."""
+    v = VEHICLES[kind]
+    length = v["length"]
+
+    def fx(x: float) -> float:
+        return x if east else length - x
+
+    def poly(points, cls: str) -> str:
+        d = "L".join(f"{_n(fx(x))} {_n(y)}" for x, y in points)
+        return f'<path class="{cls}" d="M{d}Z"/>'
+
+    def box(x: float, y: float, w: float, h: float, cls: str) -> str:
+        left = x if east else length - x - w
+        return f'<rect class="{cls}" x="{_n(left)}" y="{_n(y)}" width="{_n(w)}" height="{_n(h)}"/>'
+
+    lamp, tail, r = v["lamp"], v["tail"], v.get("radius", 3)
+    beam = ((length - 0.2, lamp - 1.2), (length + BEAM, lamp - 4.6), (length + BEAM, 0),
+            (length - 0.2, lamp + 1.2))
+    parts = [
+        poly(beam, f"hb {'e' if east else 'w'}"),
+        f'<ellipse class="th" cx="{_n(fx(0.4))}" cy="{_n(tail)}" rx="3.4" ry="2.6"/>',
+        poly(v["body"], f"vb k-{kind}"),
+    ]
+    parts += [poly(g, "gl") for g in v.get("glass", ())]
+    parts += [box(*b, "bw") for b in v.get("lit", ())]
+    if "sign" in v:
+        parts.append(box(*v["sign"], "sign"))
+    for wx in v["wheels"]:
+        cx = _n(fx(wx))
+        parts.append(f'<circle class="ty" cx="{cx}" cy="{_n(-r)}" r="{_n(r)}"/>'
+                     f'<circle class="hub" cx="{cx}" cy="{_n(-r)}" r="1.1"/>')
+    parts.append(box(length - 1.8, lamp - 0.9, 1.8, 1.8, "hl"))
+    parts.append(box(0, tail - 1.1, 1.6, 2.2, "tl"))
+    return "".join(parts)
+
+
+def lane(fleet, east: bool, tyre_y: float) -> str:
+    """One lane: every vehicle shares the lane speed and starts at its own fraction.
+
+    The inline transform is the parked position at time 0, so reduced motion
+    leaves the vehicles spread along the lane. The negative delay starts the
+    loop at the same point, so motion and the parked state agree.
+    """
+    start, end, secs = (EAST_FROM, EAST_TO, EAST_S) if east else (WEST_FROM, WEST_TO, WEST_S)
+    cls = "east" if east else "west"
+    cars = []
+    for kind, frac in fleet:
+        x = start + frac * (end - start)
+        cars.append(f'<g class="v {cls}" data-kind="{kind}" '
+                    f'style="transform:translateX({_n(x)}px);animation-delay:-{round(frac * secs, 2):g}s">'
+                    f"{vehicle(kind, east)}</g>")
+    return f'<g transform="translate(0 {_n(tyre_y)})">{"".join(cars)}</g>'
+
+
 STYLE = f"""
 text{{font-family:{FONT}}}
 .t{{fill:{T['text']};font-size:16px;font-weight:600}}
@@ -108,12 +277,7 @@ text{{font-family:{FONT}}}
 .kerb{{fill:none;stroke:{T['border']};stroke-width:1}}
 .mid{{fill:none;stroke:{T['muted']};stroke-opacity:.5;stroke-width:1;stroke-dasharray:10 14}}
 .wall{{fill:{T['canvas']};stroke:{T['border']};stroke-width:1}}
-.hl{{fill:{T['text']}}}
-.hb{{fill:{T['text']};fill-opacity:.18}}
-.tl{{fill:{T['tail']}}}
-.tt{{fill:{T['tail']};fill-opacity:.3}}
-.east{{animation:east 6s linear infinite}}
-.west{{animation:west 7.5s linear infinite}}
+{VEHICLE_STYLE}
 .water{{fill:{T['accent']};fill-opacity:.08}}
 .rf{{fill:url(#sk-fade)}}
 .shim{{animation:shim 4.8s ease-in-out infinite alternate}}
@@ -121,12 +285,15 @@ text{{font-family:{FONT}}}
 .rip{{fill:none;stroke:{T['gold']};stroke-opacity:.35;stroke-width:1;stroke-dasharray:8 18;animation:flow 10s linear infinite}}
 .rip.r2{{stroke-opacity:.18;animation-duration:14s;animation-direction:reverse}}
 .pk{{fill:{T['accent']}}}
+.rule{{fill:{T['border']};fill-opacity:.6}}
+.track{{fill:{T['deep']}}}
+.ab{{transform-box:fill-box;transform-origin:0 50%;animation:grow .9s cubic-bezier(.2,.7,.3,1) both}}
+.num{{fill:{T['text']};font-size:16px;font-weight:600}}
 @keyframes rise{{from{{transform:scaleY(0)}}}}
+@keyframes grow{{from{{transform:scaleX(0)}}}}
 @keyframes spin{{to{{transform:rotate(360deg)}}}}
 @keyframes blink{{0%,100%{{opacity:1}}50%{{opacity:.15}}}}
 @keyframes flicker{{0%,100%{{opacity:1}}50%{{opacity:.55}}}}
-@keyframes east{{from{{transform:translateX(-{LANE_TILE}px)}}to{{transform:translateX(0)}}}}
-@keyframes west{{from{{transform:translateX(0)}}to{{transform:translateX(-{LANE_TILE}px)}}}}
 @keyframes shim{{from{{opacity:1}}to{{opacity:.55}}}}
 @keyframes flow{{to{{stroke-dashoffset:-104}}}}
 @media (prefers-reduced-motion: reduce){{*{{animation:none!important}}}}
@@ -163,6 +330,64 @@ def extract_calendar(payload: dict) -> dict:
     if user is None:
         raise ValueError("GitHub user not found")
     return user["contributionsCollection"]["contributionCalendar"]
+
+
+def pick_token(env=None) -> tuple[str, str]:
+    """Return (token, source name). PROFILE_STATS_TOKEN wins over GITHUB_TOKEN."""
+    env = os.environ if env is None else env
+    for name in TOKEN_ENV_NAMES:
+        value = (env.get(name) or "").strip()
+        if value:
+            return value, name
+    return "", ""
+
+
+def _count(value) -> int:
+    try:
+        return max(0, int(value or 0))
+    except (TypeError, ValueError):
+        return 0
+
+
+def empty_stats() -> dict:
+    return {"commits": 0, "reviews": 0, "pull_requests": 0, "issues": 0, "repositories": 0,
+            "private": 0, "restricted": 0, "viewer": "", "viewer_is_owner": False,
+            "private_visible": False}
+
+
+def extract_stats(payload, login: str = DEFAULT_LOGIN) -> dict:
+    """Read the activity totals from a GraphQL response. Missing fields count as zero.
+
+    Private contributions are visible when the viewer is the profile owner, or
+    when GitHub reports a restricted count for a viewer who is not the owner.
+    """
+    stats = empty_stats()
+    if not isinstance(payload, dict):
+        return stats
+    data = payload.get("data")
+    if not isinstance(data, dict):
+        return stats
+    viewer = data.get("viewer")
+    stats["viewer"] = str(viewer.get("login") or "") if isinstance(viewer, dict) else ""
+    user = data.get("user")
+    coll = user.get("contributionsCollection") if isinstance(user, dict) else None
+    if not isinstance(coll, dict):
+        return stats
+    stats["commits"] = _count(coll.get("totalCommitContributions"))
+    stats["reviews"] = _count(coll.get("totalPullRequestReviewContributions"))
+    stats["pull_requests"] = _count(coll.get("totalPullRequestContributions"))
+    stats["issues"] = _count(coll.get("totalIssueContributions"))
+    stats["repositories"] = _count(coll.get("totalRepositoryContributions"))
+    stats["restricted"] = _count(coll.get("restrictedContributionsCount"))
+    private_commits = 0
+    for entry in coll.get("commitContributionsByRepository") or []:
+        entry = entry or {}
+        if (entry.get("repository") or {}).get("isPrivate"):
+            private_commits += _count((entry.get("contributions") or {}).get("totalCount"))
+    stats["private"] = max(private_commits, stats["restricted"])
+    stats["viewer_is_owner"] = bool(stats["viewer"]) and stats["viewer"].lower() == login.lower()
+    stats["private_visible"] = stats["viewer_is_owner"] or stats["restricted"] > 0
+    return stats
 
 
 def weeks_from_calendar(calendar: dict, limit: int = WEEKS) -> list[dict]:
@@ -371,28 +596,15 @@ def landmarks() -> str:
 
 
 def traffic() -> str:
-    """Two lanes of traffic: headlights head east, tail-lights head west."""
-    east_offsets = (12, 98, 176)
-    west_offsets = (44, 130, 204)
-    east, west = [], []
-    for tile in range(-1, WIDTH // LANE_TILE + 2):
-        base = tile * LANE_TILE
-        for o in east_offsets:
-            x = base + o
-            east.append(f'<rect class="hb" x="{x + 4}" y="320" width="20" height="2"/>'
-                        f'<rect class="hl" x="{x}" y="319.5" width="4" height="3" rx="1"/>')
-        for o in west_offsets:
-            x = base + o
-            west.append(f'<rect class="tl" x="{x}" y="305.5" width="4" height="3" rx="1"/>'
-                        f'<rect class="tt" x="{x + 4}" y="306" width="12" height="2"/>')
+    """The Embankment road: static markings, east-bound far lane, west-bound near lane."""
     return (
         f'<rect class="road" x="0" y="{GROUND}" width="{WIDTH}" height="{ROAD_BOTTOM - GROUND}"/>'
-        f'<g clip-path="url(#sk-road)">'
-        f'<g class="west">{"".join(west)}</g>'
-        f'<g class="east">{"".join(east)}</g>'
-        "</g>"
-        f'<path class="mid" d="M0 314H{WIDTH}"/>'
+        f'<path class="mid" d="M0 {MID_Y}H{WIDTH}"/>'
         f'<path class="kerb" d="M0 {GROUND + 0.5}H{WIDTH}"/>'
+        f'<g clip-path="url(#sk-road)">'
+        f"{lane(EAST_FLEET, True, FAR_LANE_Y)}"
+        f"{lane(WEST_FLEET, False, NEAR_LANE_Y)}"
+        "</g>"
     )
 
 
@@ -422,8 +634,28 @@ def legend(right: int, y: int) -> str:
     return "".join(parts)
 
 
-def render_svg(weeks: list[dict], login: str = DEFAULT_LOGIN, offline: bool = False) -> str:
-    """Render the skyline SVG for the given week records."""
+def breakdown_strip(stats: dict) -> str:
+    """Six cells: label, count and a proportional bar that grows in, staggered."""
+    values = [stats.get(key, 0) for key, _, _ in BREAKDOWN]
+    peak = max(values, default=0)
+    cells = [f'<rect class="rule" x="{X0}" y="{STRIP_TOP}" width="{WIDTH - 2 * X0}" height="1"/>']
+    for k, ((key, label, token), value) in enumerate(zip(BREAKDOWN, values)):
+        x = X0 + k * CELL_W
+        width = 0.0 if peak <= 0 or value <= 0 else max(2.0, round(BAR_MAX * value / peak, 1))
+        cells.append(
+            f'<text class="s" x="{x}" y="{STRIP_TOP + 22}">{escape(label)}</text>'
+            f'<text class="num" x="{x}" y="{STRIP_TOP + 44}">{value:,}</text>'
+            f'<rect class="track" x="{x}" y="{STRIP_TOP + 54}" width="{BAR_MAX}" height="{BAR_H}" rx="3"/>'
+            f'<rect class="ab" data-k="{key}" x="{x}" y="{STRIP_TOP + 54}" width="{width:g}" height="{BAR_H}" '
+            f'rx="3" fill="{T[token]}" style="animation-delay:{k * BAR_STAGGER_MS}ms"/>'
+        )
+    return "".join(cells)
+
+
+def render_svg(weeks: list[dict], login: str = DEFAULT_LOGIN, offline: bool = False,
+               stats: dict | None = None) -> str:
+    """Render the skyline SVG for the given week records and activity totals."""
+    stats = empty_stats() if offline or not stats else stats
     counts = [w["count"] for w in weeks]
     heights = column_heights(counts)
     peak = max(counts, default=0)
@@ -444,12 +676,17 @@ def render_svg(weeks: list[dict], login: str = DEFAULT_LOGIN, offline: bool = Fa
     else:
         start, end = weeks[0]["start"], weeks[-1]["end"]
         caption = f"{fmt_date(start)} to {fmt_date(end)}: {plural(total, 'contribution')} in {len(weeks)} weeks"
+        if stats["private_visible"]:
+            caption += ", includes private contributions"
         desc = (
             f"Night skyline of London over the Thames Embankment for {login}. "
             f"Silhouettes of {landmark_names} stand behind {len(weeks)} buildings, one per week. "
             f"Height scales with the weekly contribution count. Seven windows per building show the days, "
             f"Sunday at the top, brighter for busier days. {caption}."
         )
+        desc += (f" Activity breakdown: {stats['commits']:,} commits, {stats['reviews']:,} code reviews, "
+                 f"{stats['pull_requests']:,} pull requests, {stats['issues']:,} issues, "
+                 f"{stats['repositories']:,} new repositories, {stats['private']:,} private.")
         if peak > 0:
             desc += f" Peak week of {fmt_date(weeks[peak_index]['start'])}: {peak:,}."
 
@@ -510,7 +747,8 @@ def render_svg(weeks: list[dict], login: str = DEFAULT_LOGIN, offline: bool = Fa
         f'<stop offset="0" stop-color="{T["window"]}" stop-opacity=".5"/>'
         f'<stop offset="1" stop-color="{T["window"]}" stop-opacity="0"/>'
         "</linearGradient>"
-        f'<clipPath id="sk-road"><rect x="0" y="{GROUND}" width="{WIDTH}" height="{ROAD_BOTTOM - GROUND}"/></clipPath>'
+        f'<clipPath id="sk-road"><rect x="0" y="{GROUND - 24}" width="{WIDTH}" height="{ROAD_BOTTOM - GROUND + 24}"/></clipPath>'
+        f"{VEHICLE_DEFS}"
         "</defs>"
     )
 
@@ -535,6 +773,7 @@ def render_svg(weeks: list[dict], login: str = DEFAULT_LOGIN, offline: bool = Fa
         f"{river}"
         f'<text class="c" x="{X0}" y="428">{escape(caption)}</text>'
         f"{legend(right, 428)}"
+        f"{breakdown_strip(stats)}"
         "</svg>\n"
     )
 
@@ -542,7 +781,7 @@ def render_svg(weeks: list[dict], login: str = DEFAULT_LOGIN, offline: bool = Fa
 # I/O ----------------------------------------------------------------------
 
 def fetch_calendar(login: str, token: str, timeout: int = 30) -> dict:
-    """Fetch the contribution calendar for `login` from the GitHub GraphQL API."""
+    """Fetch the calendar, activity totals and viewer for `login` from the GitHub GraphQL API."""
     body = json.dumps({"query": QUERY, "variables": {"login": login}}).encode("utf-8")
     request = urllib.request.Request(
         API_URL,
@@ -556,6 +795,13 @@ def fetch_calendar(login: str, token: str, timeout: int = 30) -> dict:
     )
     with urllib.request.urlopen(request, timeout=timeout) as response:
         return json.load(response)
+
+
+def describe_stats(source: str, stats: dict) -> str:
+    """One log line: the token source name (never the value) and private visibility."""
+    seen = "yes" if stats["private_visible"] else "no"
+    return (f"Token source: {source or 'none'}. Viewer: {stats['viewer'] or 'unknown'}. "
+            f"Private contributions visible: {seen}.")
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -576,9 +822,10 @@ def main(argv: list[str] | None = None) -> int:
         if args.input:
             payload = json.loads(args.input.read_text(encoding="utf-8"))
         else:
-            token = os.environ.get("GITHUB_TOKEN", "").strip()
+            token, source = pick_token()
             if not token:
-                print("GITHUB_TOKEN is not set. Use --offline for a zero-data baseline.", file=sys.stderr)
+                print("PROFILE_STATS_TOKEN and GITHUB_TOKEN are not set. Use --offline for a zero-data baseline.",
+                      file=sys.stderr)
                 return 2
             try:
                 payload = fetch_calendar(args.login, token)
@@ -590,7 +837,10 @@ def main(argv: list[str] | None = None) -> int:
         except ValueError as exc:
             print(str(exc), file=sys.stderr)
             return 1
-        svg = render_svg(weeks, login=args.login)
+        stats = extract_stats(payload, args.login)
+        if not args.input:
+            print(describe_stats(source, stats))
+        svg = render_svg(weeks, login=args.login, stats=stats)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(svg, encoding="utf-8", newline="\n")
     print(f"Wrote {args.output} ({len(svg.encode('utf-8')):,} bytes)")
