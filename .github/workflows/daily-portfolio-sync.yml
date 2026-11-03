@@ -2,8 +2,8 @@ name: Daily portfolio sync
 
 on:
   schedule:
-    # 03:23 UTC each day. Off the top of the hour, when scheduled runs often queue.
-    - cron: '23 3 * * *'
+    # 00:00 UTC each day. See docs/MAINTENANCE.md.
+    - cron: '0 0 * * *'
   workflow_dispatch:
 
 permissions:

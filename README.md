@@ -162,7 +162,7 @@ This grid rebuilds each day from the public repositories of this account. Each c
 
 Each building is one week of GitHub contributions over the last 52 weeks. Its height follows the weekly total. The 7 windows are the days, with Sunday at the top. Brighter windows mark busier days, on quartile levels like the GitHub calendar. A scheduled workflow redraws the scene each day through [`scripts/portfolio_sync.py`](./scripts/portfolio_sync.py), which calls [`scripts/generate_skyline.py`](./scripts/generate_skyline.py). Until the first run, the graph shows a zero-data baseline.
 
-The graph counts commits, code reviews, pull requests, issues and private contributions.
+The graph counts commits, code reviews, pull requests, issues and private contributions. [`docs/MAINTENANCE.md`](./docs/MAINTENANCE.md) explains each figure.
 
 ## Certifications
 
@@ -224,6 +224,6 @@ MIT, see [`LICENSE`](./LICENSE). Open an issue to report a broken link or a wron
 
 #### Maintenance status
 
-Maintained. The workflow refreshes the skyline each day, and the owner edits the rest by hand.
+Maintained. The workflow refreshes the skyline each day, and the owner edits the rest by hand. Follow [`docs/MAINTENANCE.md`](./docs/MAINTENANCE.md) for the schedule, secrets and yearly token renewal.
 
 </details>
