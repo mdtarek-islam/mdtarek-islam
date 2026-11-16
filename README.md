@@ -118,60 +118,68 @@ This grid rebuilds each day from the public repositories of this account. Each c
 <p><sub>Java, 0 stars</sub></p>
 </td>
 <td width="50%" valign="top">
+<h3><a href="https://github.com/mdtarek-islam/game-dev">game-dev</a></h3>
+<p>Hub for game dev: shared tooling, templates, CI and Claude cloud config. Games live in their own repos.</p>
+<p><sub>PowerShell, 0 stars</sub></p>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
 <a href="https://github.com/mdtarek-islam/luminovels"><img src="./assets/covers/luminovels.webp" width="100%" alt="luminovels emblem" /></a>
 <h3><a href="https://github.com/mdtarek-islam/luminovels">luminovels</a></h3>
 <p><sub>Java, 0 stars</sub></p>
 </td>
-</tr>
-<tr>
 <td width="50%" valign="top">
 <a href="https://github.com/mdtarek-islam/machine-learning"><img src="./assets/covers/machine-learning.webp" width="100%" alt="machine-learning emblem" /></a>
 <h3><a href="https://github.com/mdtarek-islam/machine-learning">machine-learning</a></h3>
 <p>Ten Dockerised modules and executed reports cover statistics, regression, kernels, ensembles, clustering, semi-supervised learning, CNNs, Siamese networks, LSTMs and PPO.</p>
 <p><sub>Jupyter Notebook, 0 stars</sub></p>
 </td>
+</tr>
+<tr>
 <td width="50%" valign="top">
 <a href="https://github.com/mdtarek-islam/ml-stock-market-analysis"><img src="./assets/covers/ml-stock-market-analysis.webp" width="100%" alt="ml-stock-market-analysis emblem" /></a>
 <h3><a href="https://github.com/mdtarek-islam/ml-stock-market-analysis">ml-stock-market-analysis</a></h3>
 <p><sub>Python, 0 stars</sub></p>
 </td>
-</tr>
-<tr>
 <td width="50%" valign="top">
 <a href="https://github.com/mdtarek-islam/recommal"><img src="./assets/covers/recommal.webp" width="100%" alt="recommal emblem" /></a>
 <h3><a href="https://github.com/mdtarek-islam/recommal">recommal</a></h3>
 <p><sub>Python, 0 stars</sub></p>
 </td>
+</tr>
+<tr>
 <td width="50%" valign="top">
 <a href="https://github.com/mdtarek-islam/reinforced-ln"><img src="./assets/covers/reinforced-ln.webp" width="100%" alt="reinforced-ln emblem" /></a>
 <h3><a href="https://github.com/mdtarek-islam/reinforced-ln">reinforced-ln</a></h3>
 <p><sub>Python, 0 stars</sub></p>
 </td>
-</tr>
-<tr>
 <td width="50%" valign="top">
 <a href="https://github.com/mdtarek-islam/rental-oop"><img src="./assets/covers/rental-oop.webp" width="100%" alt="rental-oop emblem" /></a>
 <h3><a href="https://github.com/mdtarek-islam/rental-oop">rental-oop</a></h3>
 <p><sub>Python, 0 stars</sub></p>
 </td>
+</tr>
+<tr>
 <td width="50%" valign="top">
 <a href="https://github.com/mdtarek-islam/serverless-tel-parser"><img src="./assets/covers/serverless-tel-parser.webp" width="100%" alt="serverless-tel-parser emblem" /></a>
 <h3><a href="https://github.com/mdtarek-islam/serverless-tel-parser">serverless-tel-parser</a></h3>
 <p><sub>Python, 0 stars</sub></p>
 </td>
-</tr>
-<tr>
 <td width="50%" valign="top">
 <a href="https://github.com/mdtarek-islam/understanding-python"><img src="./assets/covers/understanding-python.webp" width="100%" alt="understanding-python emblem" /></a>
 <h3><a href="https://github.com/mdtarek-islam/understanding-python">understanding-python</a></h3>
 <p>Eleven executed Python 3.13 notebooks move from the memory model, typing and concurrency to graphs, dynamic programming and complexity benchmarks.</p>
 <p><sub>Jupyter Notebook, 0 stars</sub></p>
 </td>
+</tr>
+<tr>
 <td width="50%" valign="top">
 <a href="https://github.com/mdtarek-islam/watermark-detector"><img src="./assets/covers/watermark-detector.webp" width="100%" alt="watermark-detector emblem" /></a>
 <h3><a href="https://github.com/mdtarek-islam/watermark-detector">watermark-detector</a></h3>
 <p><sub>Python, 0 stars</sub></p>
 </td>
+<td width="50%"></td>
 </tr>
 </table>
 <!-- SHOWCASE:END -->
